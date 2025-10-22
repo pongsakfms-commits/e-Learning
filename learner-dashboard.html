@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แดชบอร์ดผู้เรียน - e-Learning Platform</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="main-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h4><i class="bi bi-book"></i> e-Learning</h4>
+        <small>ระบบการเรียนรู้ออนไลน์</small>
+      </div>
+      <nav class="sidebar-nav">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a href="learner-dashboard.html" class="nav-link active">
+              <i class="bi bi-speedometer2"></i>
+              <span>แดชบอร์ด</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="learner-courses.html" class="nav-link">
+              <i class="bi bi-journal-bookmark"></i>
+              <span>คอร์สเรียนของฉัน</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="learner-browse.html" class="nav-link">
+              <i class="bi bi-search"></i>
+              <span>เรียกดูคอร์ส</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="learner-progress.html" class="nav-link">
+              <i class="bi bi-bar-chart"></i>
+              <span>ความก้าวหน้า</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="learner-assignments.html" class="nav-link">
+              <i class="bi bi-clipboard-check"></i>
+              <span>งานที่มอบหมาย</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="learner-certificates.html" class="nav-link">
+              <i class="bi bi-award"></i>
+              <span>ใบประกาศนียบัตร</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="learner-profile.html" class="nav-link">
+              <i class="bi bi-person-circle"></i>
+              <span>โปรไฟล์</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle">
+            <i class="bi bi-list"></i>
+          </button>
+          <h5 class="mb-0">ยินดีต้อนรับ</h5>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-link text-dark position-relative">
+            <i class="bi bi-bell fs-5"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              3
+            </span>
+          </button>
+          <div class="user-profile">
+            <div class="user-avatar">P</div>
+            <div class="d-none d-md-block">
+              <div class="fw-semibold">ผู้เรียน</div>
+              <small class="text-muted">นักเรียน</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <div class="page-header">
+          <h2 class="page-title">แดชบอร์ด</h2>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active">หน้าหลัก</li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card stats-card">
+              <div class="stats-icon">
+                <i class="bi bi-book"></i>
+              </div>
+              <div class="stats-value">8</div>
+              <div class="stats-label">คอร์สที่ลงทะเบียน</div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card stats-card">
+              <div class="stats-icon" style="background: linear-gradient(135deg, #50C878, #28A745);">
+                <i class="bi bi-check-circle"></i>
+              </div>
+              <div class="stats-value">5</div>
+              <div class="stats-label">คอร์สที่เสร็จสมบูรณ์</div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card stats-card">
+              <div class="stats-icon" style="background: linear-gradient(135deg, #FF6B6B, #DC3545);">
+                <i class="bi bi-clock"></i>
+              </div>
+              <div class="stats-value">120</div>
+              <div class="stats-label">ชั่วโมงการเรียน</div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card stats-card">
+              <div class="stats-icon" style="background: linear-gradient(135deg, #FFC107, #FF9800);">
+                <i class="bi bi-award"></i>
+              </div>
+              <div class="stats-value">3</div>
+              <div class="stats-label">ใบประกาศนียบัตร</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">คอร์สที่กำลังเรียน</h5>
+              </div>
+              <div class="card-body">
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <div class="card course-card">
+                      <img src="https://via.placeholder.com/400x180/4A90E2/FFFFFF?text=Web+Development" alt="Course" class="course-card-image">
+                      <span class="course-badge">กำลังเรียน</span>
+                      <div class="card-body">
+                        <h6>การพัฒนาเว็บไซต์สมัยใหม่</h6>
+                        <p class="text-muted small">HTML, CSS, JavaScript และ React</p>
+                        <div class="progress-wrapper">
+                          <div class="d-flex justify-content-between mb-2">
+                            <span class="small">ความคืบหน้า</span>
+                            <span class="small fw-semibold">65%</span>
+                          </div>
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 65%"></div>
+                          </div>
+                        </div>
+                        <button class="btn btn-primary w-100 mt-3">เรียนต่อ</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="card course-card">
+                      <img src="https://via.placeholder.com/400x180/50C878/FFFFFF?text=Python+Programming" alt="Course" class="course-card-image">
+                      <span class="course-badge">กำลังเรียน</span>
+                      <div class="card-body">
+                        <h6>Python สำหรับวิทยาศาสตร์ข้อมูล</h6>
+                        <p class="text-muted small">พื้นฐาน Python และการวิเคราะห์ข้อมูล</p>
+                        <div class="progress-wrapper">
+                          <div class="d-flex justify-content-between mb-2">
+                            <span class="small">ความคืบหน้า</span>
+                            <span class="small fw-semibold">40%</span>
+                          </div>
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 40%"></div>
+                          </div>
+                        </div>
+                        <button class="btn btn-primary w-100 mt-3">เรียนต่อ</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">งานที่มอบหมายล่าสุด</h5>
+              </div>
+              <div class="card-body">
+                <div class="d-flex align-items-start mb-3">
+                  <div class="flex-shrink-0">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                      <i class="bi bi-file-text"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1">แบบทดสอบ: JavaScript Basics</h6>
+                    <p class="text-muted small mb-1">ครบกำหนด: 25 ต.ค. 2025</p>
+                    <span class="badge badge-warning">รอดำเนินการ</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-start mb-3">
+                  <div class="flex-shrink-0">
+                    <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                      <i class="bi bi-check-circle"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1">โครงงาน: สร้างเว็บไซต์</h6>
+                    <p class="text-muted small mb-1">ส่งแล้ว: 20 ต.ค. 2025</p>
+                    <span class="badge badge-success">เสร็จสิ้น</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-start">
+                  <div class="flex-shrink-0">
+                    <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                      <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1">แบบฝึกหัด: CSS Layout</h6>
+                    <p class="text-muted small mb-1">เกินกำหนด: 18 ต.ค. 2025</p>
+                    <span class="badge badge-danger">เกินกำหนด</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-3">
+              <div class="card-header">
+                <h5 class="mb-0">ประกาศล่าสุด</h5>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-info mb-2">
+                  <strong>อัพเดทระบบ</strong><br>
+                  <small>ระบบจะปิดปรับปรุงในวันที่ 30 ต.ค.</small>
+                </div>
+                <div class="alert alert-success mb-0">
+                  <strong>คอร์สใหม่!</strong><br>
+                  <small>เปิดสอนคอร์ส AI และ Machine Learning</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="overlay"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

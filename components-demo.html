@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Components Demo - e-Learning Platform</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="main-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h4><i class="bi bi-building"></i> Components</h4>
+        <small>ตัวอย่าง Component</small>
+      </div>
+      <nav class="sidebar-nav">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a href="#cards" class="nav-link active">
+              <i class="bi bi-card-heading"></i>
+              <span>Cards</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#tables" class="nav-link">
+              <i class="bi bi-table"></i>
+              <span>Tables</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#forms" class="nav-link">
+              <i class="bi bi-input-cursor"></i>
+              <span>Forms</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#buttons" class="nav-link">
+              <i class="bi bi-toggle-on"></i>
+              <span>Buttons</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#badges" class="nav-link">
+              <i class="bi bi-award"></i>
+              <span>Badges</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#alerts" class="nav-link">
+              <i class="bi bi-exclamation-circle"></i>
+              <span>Alerts</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle">
+            <i class="bi bi-list"></i>
+          </button>
+          <h5 class="mb-0">ไลบรารี่ Components</h5>
+        </div>
+        <div class="topbar-right">
+          <div class="user-profile">
+            <div class="user-avatar">C</div>
+            <div class="d-none d-md-block">
+              <div class="fw-semibold">Components</div>
+              <small class="text-muted">Demo</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <div class="page-header">
+          <h2 class="page-title">ไลบรารี่ Components พื้นฐาน</h2>
+          <p class="text-muted">ตัวอย่าง Components สำหรับนำไปใช้ซ้ำในระบบ e-Learning</p>
+        </div>
+
+        <section id="cards" class="mb-5">
+          <h3 class="mb-4">Cards</h3>
+          
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="mb-0">Basic Card</h5>
+                </div>
+                <div class="card-body">
+                  <p>This is a basic card with header and body. Perfect for displaying content blocks.</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary">Action</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card stats-card">
+                <div class="stats-icon">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="stats-value">1,245</div>
+                <div class="stats-label">Total Users</div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card course-card">
+                <img src="https://via.placeholder.com/400x180/4A90E2/FFFFFF?text=Course+Image" alt="Course" class="course-card-image">
+                <span class="course-badge">กำลังเรียน</span>
+                <div class="card-body">
+                  <h6>Course Card</h6>
+                  <p class="text-muted small">With image and progress bar</p>
+                  <div class="progress-wrapper">
+                    <div class="d-flex justify-content-between mb-2">
+                      <span class="small">Progress</span>
+                      <span class="small fw-semibold">75%</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 75%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="tables" class="mb-5">
+          <h3 class="mb-4">Tables</h3>
+          
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Data Table</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-wrapper">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>001</td>
+                      <td>สมชาย ใจดี</td>
+                      <td>somchai@example.com</td>
+                      <td><span class="badge badge-success">Active</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-link text-primary">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-link text-danger">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>002</td>
+                      <td>สมหญิง รักเรียน</td>
+                      <td>somying@example.com</td>
+                      <td><span class="badge badge-warning">Pending</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-link text-primary">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-link text-danger">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>003</td>
+                      <td>วิชัย สร้างสรรค์</td>
+                      <td>wichai@example.com</td>
+                      <td><span class="badge badge-danger">Inactive</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-link text-primary">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-link text-danger">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="forms" class="mb-5">
+          <h3 class="mb-4">Forms</h3>
+          
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Form Example</h5>
+            </div>
+            <div class="card-body">
+              <form data-validate="true">
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">ชื่อ-นามสกุล <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" placeholder="กรอกชื่อ-นามสกุล" required>
+                      <small class="form-text">กรุณากรอกชื่อและนามสกุลของคุณ</small>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">อีเมล <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control" placeholder="example@email.com" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">เบอร์โทรศัพท์</label>
+                      <input type="tel" class="form-control" placeholder="0812345678">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">วันเกิด</label>
+                      <input type="date" class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">หมวดหมู่สนใจ</label>
+                  <select class="form-control">
+                    <option value="">เลือกหมวดหมู่</option>
+                    <option value="web">Web Development</option>
+                    <option value="data">Data Science</option>
+                    <option value="design">Design</option>
+                    <option value="business">Business</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">เกี่ยวกับคุณ</label>
+                  <textarea class="form-control" rows="4" placeholder="บอกเล่าเกี่ยวกับตัวคุณ..."></textarea>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="terms">
+                    <label class="form-check-label" for="terms">
+                      ฉันยอมรับ <a href="#">ข้อกำหนดและเงื่อนไข</a>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                  <button type="submit" class="btn btn-primary">บันทึก</button>
+                  <button type="button" class="btn btn-outline">ยกเลิก</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section id="buttons" class="mb-5">
+          <h3 class="mb-4">Buttons</h3>
+          
+          <div class="card">
+            <div class="card-body">
+              <div class="mb-3">
+                <h6>Solid Buttons</h6>
+                <div class="d-flex flex-wrap gap-2">
+                  <button class="btn btn-primary">Primary</button>
+                  <button class="btn btn-secondary">Secondary</button>
+                  <button class="btn btn-success">Success</button>
+                  <button class="btn btn-danger">Danger</button>
+                  <button class="btn btn-warning">Warning</button>
+                  <button class="btn btn-info">Info</button>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <h6>Outline Buttons</h6>
+                <div class="d-flex flex-wrap gap-2">
+                  <button class="btn btn-outline">Outline Primary</button>
+                  <button class="btn btn-outline-secondary">Outline Secondary</button>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <h6>Button Sizes</h6>
+                <div class="d-flex flex-wrap gap-2 align-items-center">
+                  <button class="btn btn-primary btn-sm">Small</button>
+                  <button class="btn btn-primary">Regular</button>
+                  <button class="btn btn-primary btn-lg">Large</button>
+                </div>
+              </div>
+
+              <div>
+                <h6>Icon Buttons</h6>
+                <div class="d-flex flex-wrap gap-2">
+                  <button class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-2"></i>Add New
+                  </button>
+                  <button class="btn btn-success">
+                    <i class="bi bi-check-circle me-2"></i>Confirm
+                  </button>
+                  <button class="btn btn-danger">
+                    <i class="bi bi-trash me-2"></i>Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="badges" class="mb-5">
+          <h3 class="mb-4">Badges</h3>
+          
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge badge-success">Success</span>
+                <span class="badge badge-warning">Warning</span>
+                <span class="badge badge-danger">Danger</span>
+                <span class="badge badge-info">Info</span>
+                <span class="badge bg-primary">Primary</span>
+                <span class="badge bg-secondary">Secondary</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="alerts" class="mb-5">
+          <h3 class="mb-4">Alerts</h3>
+          
+          <div class="alert alert-success">
+            <strong><i class="bi bi-check-circle me-2"></i>Success!</strong>
+            Your operation completed successfully.
+          </div>
+
+          <div class="alert alert-warning">
+            <strong><i class="bi bi-exclamation-triangle me-2"></i>Warning!</strong>
+            Please check your input before proceeding.
+          </div>
+
+          <div class="alert alert-danger">
+            <strong><i class="bi bi-x-circle me-2"></i>Error!</strong>
+            Something went wrong. Please try again.
+          </div>
+
+          <div class="alert alert-info">
+            <strong><i class="bi bi-info-circle me-2"></i>Info!</strong>
+            Here's some helpful information for you.
+          </div>
+        </section>
+
+        <section id="progress" class="mb-5">
+          <h3 class="mb-4">Progress Bars</h3>
+          
+          <div class="card">
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Course Progress</span>
+                  <span class="fw-semibold">75%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" style="width: 75%"></div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Assignment Completion</span>
+                  <span class="fw-semibold">50%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" style="width: 50%; background: linear-gradient(90deg, #50C878, #28A745);"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Quiz Score</span>
+                  <span class="fw-semibold">90%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" style="width: 90%; background: linear-gradient(90deg, #FFC107, #FF9800);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="overlay"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แดชบอร์ดผู้ดูแลระบบ - e-Learning Platform</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="main-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h4><i class="bi bi-shield-check"></i> Admin Panel</h4>
+        <small>ระบบจัดการ e-Learning</small>
+      </div>
+      <nav class="sidebar-nav">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a href="admin-dashboard.html" class="nav-link active">
+              <i class="bi bi-speedometer2"></i>
+              <span>แดชบอร์ด</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="admin-courses.html" class="nav-link">
+              <i class="bi bi-journal-bookmark"></i>
+              <span>จัดการคอร์ส</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="admin-users.html" class="nav-link">
+              <i class="bi bi-people"></i>
+              <span>จัดการผู้ใช้</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="admin-instructors.html" class="nav-link">
+              <i class="bi bi-person-badge"></i>
+              <span>จัดการผู้สอน</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="admin-categories.html" class="nav-link">
+              <i class="bi bi-tag"></i>
+              <span>หมวดหมู่คอร์ส</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="admin-reports.html" class="nav-link">
+              <i class="bi bi-graph-up"></i>
+              <span>รายงาน</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="admin-settings.html" class="nav-link">
+              <i class="bi bi-gear"></i>
+              <span>ตั้งค่าระบบ</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle">
+            <i class="bi bi-list"></i>
+          </button>
+          <h5 class="mb-0">ระบบจัดการ</h5>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-link text-dark position-relative">
+            <i class="bi bi-bell fs-5"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              5
+            </span>
+          </button>
+          <div class="user-profile">
+            <div class="user-avatar">A</div>
+            <div class="d-none d-md-block">
+              <div class="fw-semibold">ผู้ดูแลระบบ</div>
+              <small class="text-muted">Admin</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <div class="page-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h2 class="page-title">แดชบอร์ดผู้ดูแลระบบ</h2>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active">หน้าหลัก</li>
+                </ol>
+              </nav>
+            </div>
+            <div>
+              <button class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>สร้างคอร์สใหม่
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card stats-card">
+              <div class="stats-icon">
+                <i class="bi bi-people"></i>
+              </div>
+              <div class="stats-value">1,245</div>
+              <div class="stats-label">ผู้ใช้ทั้งหมด</div>
+              <small class="text-success"><i class="bi bi-arrow-up"></i> +12% จากเดือนที่แล้ว</small>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card stats-card">
+              <div class="stats-icon" style="background: linear-gradient(135deg, #50C878, #28A745);">
+                <i class="bi bi-journal-bookmark"></i>
+              </div>
+              <div class="stats-value">48</div>
+              <div class="stats-label">คอร์สทั้งหมด</div>
+              <small class="text-success"><i class="bi bi-arrow-up"></i> +3 คอร์สใหม่</small>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card stats-card">
+              <div class="stats-icon" style="background: linear-gradient(135deg, #FF6B6B, #DC3545);">
+                <i class="bi bi-person-badge"></i>
+              </div>
+              <div class="stats-value">25</div>
+              <div class="stats-label">ผู้สอน</div>
+              <small class="text-muted">Active instructors</small>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card stats-card">
+              <div class="stats-icon" style="background: linear-gradient(135deg, #FFC107, #FF9800);">
+                <i class="bi bi-cash-stack"></i>
+              </div>
+              <div class="stats-value">฿125K</div>
+              <div class="stats-label">รายได้เดือนนี้</div>
+              <small class="text-success"><i class="bi bi-arrow-up"></i> +8%</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-xl-8">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">คอร์สล่าสุด</h5>
+                <a href="admin-courses.html" class="btn btn-sm btn-outline">ดูทั้งหมด</a>
+              </div>
+              <div class="card-body">
+                <div class="table-wrapper">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>ชื่อคอร์ส</th>
+                        <th>ผู้สอน</th>
+                        <th>ผู้เรียน</th>
+                        <th>สถานะ</th>
+                        <th>การจัดการ</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40/4A90E2/FFFFFF?text=W" class="rounded me-2" alt="Course">
+                            <div>
+                              <div class="fw-semibold">การพัฒนาเว็บไซต์สมัยใหม่</div>
+                              <small class="text-muted">Web Development</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td>อาจารย์ สมชาย</td>
+                        <td>145</td>
+                        <td><span class="badge badge-success">เผยแพร่แล้ว</span></td>
+                        <td>
+                          <button class="btn btn-sm btn-link text-primary" data-tooltip="แก้ไข">
+                            <i class="bi bi-pencil"></i>
+                          </button>
+                          <button class="btn btn-sm btn-link text-danger" data-tooltip="ลบ">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40/50C878/FFFFFF?text=P" class="rounded me-2" alt="Course">
+                            <div>
+                              <div class="fw-semibold">Python สำหรับวิทยาศาสตร์ข้อมูล</div>
+                              <small class="text-muted">Data Science</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td>อาจารย์ สมหญิง</td>
+                        <td>89</td>
+                        <td><span class="badge badge-success">เผยแพร่แล้ว</span></td>
+                        <td>
+                          <button class="btn btn-sm btn-link text-primary" data-tooltip="แก้ไข">
+                            <i class="bi bi-pencil"></i>
+                          </button>
+                          <button class="btn btn-sm btn-link text-danger" data-tooltip="ลบ">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40/FF6B6B/FFFFFF?text=UI" class="rounded me-2" alt="Course">
+                            <div>
+                              <div class="fw-semibold">UI/UX Design Fundamentals</div>
+                              <small class="text-muted">Design</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td>อาจารย์ วิชัย</td>
+                        <td>67</td>
+                        <td><span class="badge badge-warning">รอตรวจสอบ</span></td>
+                        <td>
+                          <button class="btn btn-sm btn-link text-primary" data-tooltip="แก้ไข">
+                            <i class="bi bi-pencil"></i>
+                          </button>
+                          <button class="btn btn-sm btn-link text-danger" data-tooltip="ลบ">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40/FFC107/FFFFFF?text=DB" class="rounded me-2" alt="Course">
+                            <div>
+                              <div class="fw-semibold">Database Management Systems</div>
+                              <small class="text-muted">Database</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td>อาจารย์ ประเสริฐ</td>
+                        <td>52</td>
+                        <td><span class="badge badge-info">แบบร่าง</span></td>
+                        <td>
+                          <button class="btn btn-sm btn-link text-primary" data-tooltip="แก้ไข">
+                            <i class="bi bi-pencil"></i>
+                          </button>
+                          <button class="btn btn-sm btn-link text-danger" data-tooltip="ลบ">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-3">
+              <div class="card-header">
+                <h5 class="mb-0">กิจกรรมล่าสุด</h5>
+              </div>
+              <div class="card-body">
+                <div class="d-flex mb-3">
+                  <div class="flex-shrink-0">
+                    <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                      <i class="bi bi-person-plus"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <div class="fw-semibold">ผู้ใช้ใหม่ลงทะเบียน</div>
+                    <small class="text-muted">สมศักดิ์ เพิ่งสมัครสมาชิกใหม่ในระบบ</small>
+                    <div class="text-muted small mt-1">5 นาทีที่แล้ว</div>
+                  </div>
+                </div>
+                <div class="d-flex mb-3">
+                  <div class="flex-shrink-0">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                      <i class="bi bi-journal-plus"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <div class="fw-semibold">คอร์สใหม่ถูกสร้าง</div>
+                    <small class="text-muted">อาจารย์ สมชาย สร้างคอร์ส "React Advanced Patterns"</small>
+                    <div class="text-muted small mt-1">2 ชั่วโมงที่แล้ว</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <div class="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                      <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <div class="fw-semibold">คอร์สรอการอนุมัติ</div>
+                    <small class="text-muted">คอร์ส "Machine Learning Basics" รอการตรวจสอบ</small>
+                    <div class="text-muted small mt-1">5 ชั่วโมงที่แล้ว</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-xl-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">สถิติรายวัน</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>ผู้ใช้ออนไลน์</span>
+                    <span class="fw-semibold text-primary">234</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 75%"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>การลงทะเบียนวันนี้</span>
+                    <span class="fw-semibold text-success">45</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 60%; background: linear-gradient(90deg, #50C878, #28A745);"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>คอร์สที่กำลังเรียน</span>
+                    <span class="fw-semibold text-warning">890</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 90%; background: linear-gradient(90deg, #FFC107, #FF9800);"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>งานที่ส่งวันนี้</span>
+                    <span class="fw-semibold text-danger">156</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 50%; background: linear-gradient(90deg, #FF6B6B, #DC3545);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-3">
+              <div class="card-header">
+                <h5 class="mb-0">คอร์สยอดนิยม</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <div class="d-flex align-items-center mb-2">
+                    <span class="badge bg-primary me-2">1</span>
+                    <span class="flex-grow-1">การพัฒนาเว็บไซต์สมัยใหม่</span>
+                  </div>
+                  <small class="text-muted">145 ผู้เรียน</small>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex align-items-center mb-2">
+                    <span class="badge bg-primary me-2">2</span>
+                    <span class="flex-grow-1">Python สำหรับวิทยาศาสตร์ข้อมูล</span>
+                  </div>
+                  <small class="text-muted">89 ผู้เรียน</small>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex align-items-center mb-2">
+                    <span class="badge bg-primary me-2">3</span>
+                    <span class="flex-grow-1">UI/UX Design Fundamentals</span>
+                  </div>
+                  <small class="text-muted">67 ผู้เรียน</small>
+                </div>
+                <div>
+                  <div class="d-flex align-items-center mb-2">
+                    <span class="badge bg-primary me-2">4</span>
+                    <span class="flex-grow-1">Database Management Systems</span>
+                  </div>
+                  <small class="text-muted">52 ผู้เรียน</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-3">
+              <div class="card-header">
+                <h5 class="mb-0">การดำเนินการด่วน</h5>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-warning mb-2">
+                  <strong><i class="bi bi-exclamation-triangle me-2"></i>3 คอร์ส</strong><br>
+                  <small>รอการอนุมัติ</small>
+                </div>
+                <div class="alert alert-danger mb-2">
+                  <strong><i class="bi bi-flag me-2"></i>5 รายงาน</strong><br>
+                  <small>รอการตรวจสอบ</small>
+                </div>
+                <div class="alert alert-info mb-0">
+                  <strong><i class="bi bi-chat-dots me-2"></i>12 ข้อความ</strong><br>
+                  <small>รอการตอบกลับ</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="overlay"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
