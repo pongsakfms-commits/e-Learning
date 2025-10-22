@@ -1,0 +1,124 @@
+<%- include('../partials/layout-start', { title: pageTitle }) %>
+
+<section class="card">
+  <div class="card-header">
+    <h2>ค้นหาและกรองผู้เรียน</h2>
+    <span class="text-muted">สามารถค้นหาจากชื่อ อีเมล และเลือกสถานะการสอบได้</span>
+  </div>
+  <form class="filters-form" method="get" action="<%= buildAdminUrl('') %>">
+    <input type="hidden" name="adminToken" value="<%= adminToken %>">
+    <input type="hidden" name="page" value="1">
+    <div class="form-group">
+      <label for="filter-q">ค้นหาชื่อหรืออีเมล</label>
+      <input id="filter-q" type="text" name="q" value="<%= filters.q %>" placeholder="กรอกชื่อหรืออีเมลผู้เรียน">
+    </div>
+    <div class="form-group">
+      <label for="filter-status">สถานะการสอบ</label>
+      <select id="filter-status" name="status">
+        <option value="all" <%= filters.status === 'all' ? 'selected' : '' %>>ทั้งหมด</option>
+        <% examStatuses.forEach(function(status) { %>
+          <option value="<%= status.value %>" <%= filters.status === status.value ? 'selected' : '' %>><%= status.label %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="filter-per-page">จำนวนต่อหน้า</label>
+      <select id="filter-per-page" name="perPage">
+        <% perPageOptions.forEach(function(option) { %>
+          <option value="<%= option %>" <%= filters.perPage === option ? 'selected' : '' %>><%= option %> รายการ</option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="filters-actions">
+      <button class="btn btn-primary" type="submit">ค้นหา</button>
+      <a class="btn btn-ghost" href="<%= buildAdminUrl('', { q: '', status: 'all', perPage: perPageOptions[0], page: 1 }) %>">ล้างการค้นหา</a>
+    </div>
+  </form>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>รายการผู้เรียนทั้งหมด</h2>
+      <p class="text-muted">พบทั้งหมด <%= pagination.totalItems %> รายการ</p>
+    </div>
+    <div class="btn-group">
+      <a class="btn btn-secondary" href="<%= buildAdminUrl('new') %>">เพิ่มผู้เรียน</a>
+      <a class="btn btn-ghost" href="<%= buildAdminUrl('export', { q: filters.q, status: filters.status }) %>">ส่งออก CSV</a>
+    </div>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>ชื่อ - นามสกุล</th>
+          <th>อีเมล</th>
+          <th>สถานะการสอบ</th>
+          <th>สร้างเมื่อ</th>
+          <th>อัปเดตล่าสุด</th>
+          <th>รีเซ็ตรหัสผ่านล่าสุด</th>
+          <th style="text-align: right;">การจัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (!students.length) { %>
+          <tr>
+            <td colspan="8" class="empty-state">ไม่พบข้อมูลผู้เรียนที่ตรงกับเงื่อนไข</td>
+          </tr>
+        <% } else { %>
+          <% students.forEach(function(student, index) { %>
+            <tr>
+              <td><%= (pagination.from || 0) + index %></td>
+              <td>
+                <div><strong><%= student.firstName %> <%= student.lastName %></strong></div>
+                <div class="text-muted">รหัส: <%= student.id %></div>
+              </td>
+              <td><%= student.email %></td>
+              <td>
+                <% const badgeClass = 'badge--' + student.examStatus; %>
+                <span class="badge <%= badgeClass %>"><%= examStatusLabels[student.examStatus] || student.examStatus %></span>
+              </td>
+              <td><%= formatDateTime(student.createdAt) %></td>
+              <td><%= formatDateTime(student.updatedAt) %></td>
+              <td><%= student.lastPasswordResetAt ? formatDateTime(student.lastPasswordResetAt) : '-' %></td>
+              <td style="text-align: right;">
+                <div class="btn-group">
+                  <a class="btn btn-secondary btn-small" href="<%= buildAdminUrl(student.id + '/edit') %>">แก้ไข</a>
+                  <form class="inline-form" method="post" action="<%= buildAdminUrl(student.id + '/reset-password') %>" data-confirm="ยืนยันรีเซ็ตรหัสผ่านสำหรับ <%= student.firstName %> <%= student.lastName %>?">
+                    <input type="hidden" name="adminToken" value="<%= adminToken %>">
+                    <button class="btn btn-ghost btn-small" type="submit">รีเซ็ตรหัสผ่าน</button>
+                  </form>
+                  <form class="inline-form" method="post" action="<%= buildAdminUrl(student.id) %>" data-confirm="ต้องการลบผู้เรียน <%= student.firstName %> <%= student.lastName %> หรือไม่?">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="adminToken" value="<%= adminToken %>">
+                    <button class="btn btn-danger btn-small" type="submit">ลบ</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <% if (pagination.totalItems > 0) { %>
+    <div class="pagination">
+      <div class="pagination-info">
+        แสดง <%= pagination.from %> - <%= pagination.to %> จากทั้งหมด <%= pagination.totalItems %> รายการ
+      </div>
+      <div class="pagination-controls">
+        <% if (pagination.hasPrev) { %>
+          <a class="btn btn-ghost btn-small" href="<%= buildAdminUrl('', { q: filters.q, status: filters.status, perPage: filters.perPage, page: pagination.prevPage }) %>">&laquo; ก่อนหน้า</a>
+        <% } %>
+        <span class="pagination-page">หน้า <%= pagination.currentPage %> / <%= pagination.totalPages || 1 %></span>
+        <% if (pagination.hasNext) { %>
+          <a class="btn btn-ghost btn-small" href="<%= buildAdminUrl('', { q: filters.q, status: filters.status, perPage: filters.perPage, page: pagination.nextPage }) %>">ถัดไป &raquo;</a>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+</section>
+
+<%- include('../partials/layout-end') %>
