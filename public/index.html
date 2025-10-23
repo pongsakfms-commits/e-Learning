@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แดชบอร์ดผู้เรียน | e-Learning by pom</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="brand">
+      <span class="brand-logo">📚</span>
+      <div class="brand-text">
+        <strong>e-Learning</strong>
+        <small>เวอร์ชันผู้เรียน</small>
+      </div>
+    </div>
+    <nav class="main-navigation">
+      <a href="#overview" class="nav-link active">ภาพรวม</a>
+      <a href="#courses" class="nav-link">คอร์ส</a>
+      <a href="#recommendations" class="nav-link">คำแนะนำ</a>
+      <a href="#history" class="nav-link">ประวัติแบบทดสอบ</a>
+    </nav>
+    <div class="user-profile">
+      <div class="user-info">
+        <span class="user-name" id="navLearnerName">สมชาย มั่นคง</span>
+        <span class="user-role">ผู้เรียน</span>
+      </div>
+      <div class="avatar" aria-hidden="true">SM</div>
+    </div>
+  </header>
+
+  <aside class="quick-actions" aria-label="จุดเชื่อมโยงด่วน">
+    <button class="quick-action" data-target="#recommendations">🎯 เป้าหมายการเรียน</button>
+    <button class="quick-action" data-target="#history">📄 ดาวน์โหลดผลสอบ</button>
+    <button class="quick-action" data-target="#courses">📚 คอร์สของฉัน</button>
+  </aside>
+
+  <main>
+    <section id="overview" class="panel">
+      <header class="panel-header">
+        <div>
+          <h1>สวัสดี <span id="learnerName">ผู้เรียน</span> 👋</h1>
+          <p class="subtitle">ตรวจสอบความคืบหน้า คะแนนล่าสุด และคำแนะนำการเรียนของคุณได้ที่นี่</p>
+        </div>
+        <div class="latest-login">
+          <span class="label">เข้าสู่ระบบล่าสุด</span>
+          <time id="lastLogin" datetime="">-</time>
+        </div>
+      </header>
+
+      <div class="summary-grid" id="summaryCards" role="list">
+        <!-- Summary cards will be injected here -->
+      </div>
+
+      <div class="latest-wrapper">
+        <div class="latest-score" id="latestScore">
+          <h2>คะแนนล่าสุด</h2>
+          <div class="score-display">
+            <span class="score-value">-</span>
+            <span class="score-status">รอดำเนินการ</span>
+          </div>
+          <p class="score-message">ระบบจะอัปเดตคะแนนเมื่อทำแบบทดสอบเสร็จ</p>
+        </div>
+
+        <div class="latest-tests">
+          <h2>แบบทดสอบล่าสุด</h2>
+          <ul class="latest-tests-list" id="latestTestsList">
+            <!-- Latest tests will be injected here -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses" class="panel">
+      <header class="panel-header">
+        <div>
+          <h2>คอร์สที่กำลังเรียน</h2>
+          <p class="subtitle">ติดตามความคืบหน้าและสถานะการทำข้อสอบของแต่ละคอร์ส</p>
+        </div>
+        <div class="course-filters">
+          <button class="chip active" data-filter="all">ทั้งหมด</button>
+          <button class="chip" data-filter="in-progress">กำลังเรียน</button>
+          <button class="chip" data-filter="completed">เรียนจบ</button>
+        </div>
+      </header>
+      <div class="course-list" id="courseList">
+        <!-- Course cards injected here -->
+      </div>
+    </section>
+
+    <section id="recommendations" class="panel">
+      <header class="panel-header">
+        <div>
+          <h2>คำแนะนำและเกณฑ์ผ่าน</h2>
+          <p class="subtitle">ระบบวิเคราะห์คะแนนและความคืบหน้า เพื่อแนะนำแนวทางการเรียนต่อ</p>
+        </div>
+        <div class="pass-criteria">
+          <span class="criteria-label">เกณฑ์มาตรฐาน</span>
+          <div class="criteria-info">
+            <span class="criteria-item">คะแนนผ่านขั้นต่ำ: <strong id="defaultPassScore">60</strong></span>
+            <span class="criteria-item">การเรียนรู้ต่อเนื่อง: <strong id="progressThreshold">≥ 70% ความคืบหน้า</strong></span>
+          </div>
+        </div>
+      </header>
+
+      <div class="recommendations-container" id="recommendationsList" role="list">
+        <!-- Recommendation cards will be injected here -->
+      </div>
+    </section>
+
+    <section id="history" class="panel">
+      <header class="panel-header">
+        <div>
+          <h2>ประวัติการทำแบบทดสอบ</h2>
+          <p class="subtitle">ตรวจสอบสถิติการทำแบบทดสอบ พร้อมดาวน์โหลดผลเป็นไฟล์ PDF</p>
+        </div>
+        <div class="history-filters">
+          <label>
+            <span class="filter-label">แสดงผล:</span>
+            <select id="historyFilter" aria-label="กรองผลแบบทดสอบ">
+              <option value="all">ทั้งหมด</option>
+              <option value="passed">ผ่าน</option>
+              <option value="failed">ไม่ผ่าน</option>
+            </select>
+          </label>
+        </div>
+      </header>
+
+      <div class="history-table-wrapper" tabindex="0">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th scope="col">วันที่</th>
+              <th scope="col">วิชา</th>
+              <th scope="col">ชื่อแบบทดสอบ</th>
+              <th scope="col">คะแนน</th>
+              <th scope="col">สถานะ</th>
+              <th scope="col">ผลลัพธ์</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+            <tr>
+              <td colspan="6" class="empty-state">กำลังโหลดข้อมูล...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>© <span id="currentYear"></span> e-Learning by pom · พัฒนาสำหรับระบบตัวอย่างเท่านั้น</p>
+  </footer>
+
+  <script type="module" src="./scripts/app.js"></script>
+</body>
+</html>
