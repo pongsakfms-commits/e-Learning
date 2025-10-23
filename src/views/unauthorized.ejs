@@ -1,0 +1,15 @@
+<%- include('partials/layout-start', { title: typeof title !== 'undefined' ? title : 'เข้าใช้งานไม่ได้' }) %>
+
+<section class="card">
+  <div class="card-header">
+    <h2>จำกัดการเข้าถึง</h2>
+  </div>
+  <p class="text-muted">
+    คุณไม่มีสิทธิ์ใช้งานหน้านี้ กรุณาระบุ <code>adminToken</code> ให้ถูกต้องก่อนเข้าถึงหน้าแอดมิน.
+  </p>
+  <p class="text-muted">
+    หากคุณยังไม่มี token กรุณาติดต่อผู้ดูแลระบบ หรือกำหนดค่าตัวแปร <code>ADMIN_TOKEN</code> ก่อนเริ่มใช้งาน (ค่าเริ่มต้นสำหรับการทดสอบคือ <strong>admin123</strong>).
+  </p>
+</section>
+
+<%- include('partials/layout-end') %>

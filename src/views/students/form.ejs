@@ -1,0 +1,100 @@
+<%- include('../partials/layout-start', { title: pageTitle }) %>
+
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2><%= pageTitle %></h2>
+      <p class="text-muted">กรอกรายละเอียดผู้เรียนให้ครบถ้วนเพื่อบันทึกข้อมูล</p>
+    </div>
+    <a class="btn btn-ghost" href="<%= buildAdminUrl('') %>">กลับสู่หน้ารายการ</a>
+  </div>
+
+  <% if (formError) { %>
+    <div class="alert alert--danger">
+      <span><%= formError %></span>
+    </div>
+  <% } %>
+
+  <form method="post" action="<%= isEditing ? buildAdminUrl(student.id) : buildAdminUrl('') %>" class="form-grid">
+    <input type="hidden" name="adminToken" value="<%= adminToken %>">
+    <% if (isEditing) { %>
+      <input type="hidden" name="_method" value="PUT">
+    <% } %>
+
+    <div class="form-field">
+      <label for="firstName">ชื่อ <span class="text-muted">(จำเป็น)</span></label>
+      <input id="firstName" type="text" name="firstName" value="<%= student.firstName %>" required>
+      <% if (errors.firstName) { %>
+        <p class="field-error"><%= errors.firstName %></p>
+      <% } %>
+    </div>
+
+    <div class="form-field">
+      <label for="lastName">นามสกุล <span class="text-muted">(จำเป็น)</span></label>
+      <input id="lastName" type="text" name="lastName" value="<%= student.lastName %>" required>
+      <% if (errors.lastName) { %>
+        <p class="field-error"><%= errors.lastName %></p>
+      <% } %>
+    </div>
+
+    <div class="form-field">
+      <label for="email">อีเมล <span class="text-muted">(จำเป็น)</span></label>
+      <input id="email" type="email" name="email" value="<%= student.email %>" required>
+      <% if (errors.email) { %>
+        <p class="field-error"><%= errors.email %></p>
+      <% } %>
+    </div>
+
+    <div class="form-field">
+      <label for="examStatus">สถานะการสอบ</label>
+      <select id="examStatus" name="examStatus">
+        <% examStatuses.forEach(function(status) { %>
+          <option value="<%= status.value %>" <%= student.examStatus === status.value ? 'selected' : '' %>><%= status.label %></option>
+        <% }) %>
+      </select>
+      <% if (errors.examStatus) { %>
+        <p class="field-error"><%= errors.examStatus %></p>
+      <% } %>
+    </div>
+
+    <% if (!isEditing) { %>
+      <div class="form-field">
+        <label for="password">รหัสผ่านเริ่มต้น <span class="text-muted">(อย่างน้อย 8 ตัวอักษร)</span></label>
+        <input id="password" type="password" name="password" autocomplete="new-password" required>
+        <% if (errors.password) { %>
+          <p class="field-error"><%= errors.password %></p>
+        <% } %>
+      </div>
+
+      <div class="form-field">
+        <label for="confirmPassword">ยืนยันรหัสผ่าน</label>
+        <input id="confirmPassword" type="password" name="confirmPassword" autocomplete="new-password" required>
+        <% if (errors.confirmPassword) { %>
+          <p class="field-error"><%= errors.confirmPassword %></p>
+        <% } %>
+      </div>
+    <% } %>
+
+    <div class="form-actions" style="grid-column: 1 / -1;">
+      <a class="btn btn-ghost" href="<%= buildAdminUrl('') %>">ยกเลิก</a>
+      <button class="btn btn-primary" type="submit"><%= isEditing ? 'บันทึกการแก้ไข' : 'สร้างผู้เรียน' %></button>
+    </div>
+  </form>
+</section>
+
+<% if (isEditing) { %>
+  <section class="card">
+    <div class="card-header">
+      <div>
+        <h2>จัดการความปลอดภัย</h2>
+        <p class="text-muted">สามารถรีเซ็ตรหัสผ่านผู้เรียนจากหน้านี้ได้</p>
+      </div>
+      <form class="inline-form" method="post" action="<%= buildAdminUrl(student.id + '/reset-password') %>" data-confirm="ยืนยันรีเซ็ตรหัสผ่านสำหรับ <%= student.firstName %> <%= student.lastName %>?">
+        <input type="hidden" name="adminToken" value="<%= adminToken %>">
+        <button class="btn btn-ghost" type="submit">รีเซ็ตรหัสผ่าน</button>
+      </form>
+    </div>
+  </section>
+<% } %>
+
+<%- include('../partials/layout-end') %>
