@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คอร์สเรียน Python - e-Learning by Pom</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="landing">
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🐍 Python Course</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="active">คอร์สเรียน</a>
+                    <a href="final-project.html">โปรเจกต์สุดท้าย</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="course-overview">
+            <div class="hero">
+                <h2 data-hero-title>เรียนรู้ Python จากพื้นฐานสู่ขั้นสูง</h2>
+                <p class="subtitle" data-hero-tagline>คอร์สเรียน Python แบบครบวงจร เหมาะสำหรับผู้เริ่มต้นและผู้ที่ต้องการพัฒนาทักษะการเขียนโปรแกรม</p>
+                <p class="course-description" data-hero-description></p>
+                <div class="course-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="totalLessons">0</span>
+                        <span class="stat-label">บทเรียน</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="completedLessons">0</span>
+                        <span class="stat-label">เรียนแล้ว</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="progressPercent">0%</span>
+                        <span class="stat-label">ความคืบหน้า</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="overallProgress">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="course-content">
+            <h3>รายการบทเรียน</h3>
+            <div class="lessons-list" id="lessonsList">
+                <!-- Lessons will be dynamically loaded here -->
+            </div>
+            <div class="final-project-callout" data-final-callout>
+                <h4>พร้อมหรือยังสำหรับโปรเจกต์สุดท้าย?</h4>
+                <p>เรียนครบทุกบทเพื่อปลดล็อกคำแนะนำโปรเจกต์สุดท้ายและส่งผลงานของคุณ</p>
+                <a class="btn-primary" href="final-project.html">ดูรายละเอียดโปรเจกต์</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 e-Learning by Pom. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/lessons-data.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+</body>
+</html>
