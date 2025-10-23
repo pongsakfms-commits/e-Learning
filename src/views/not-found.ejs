@@ -1,0 +1,13 @@
+<%- include('partials/layout-start', { title: pageTitle || 'ไม่พบข้อมูล' }) %>
+
+<section class="card">
+  <div class="card-header">
+    <h2>ไม่พบหน้าที่ต้องการ</h2>
+  </div>
+  <p class="text-muted"><%= message || 'ไม่พบข้อมูลที่ต้องการ' %></p>
+  <div class="form-actions">
+    <a class="btn btn-ghost" href="<%= typeof buildAdminUrl === 'function' ? buildAdminUrl('') : '/' %>">กลับหน้าหลัก</a>
+  </div>
+</section>
+
+<%- include('partials/layout-end') %>

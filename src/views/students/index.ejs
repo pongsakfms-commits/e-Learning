@@ -1,0 +1,180 @@
+<%- include('../partials/layout-start', { title: pageTitle }) %>
+
+<% if (typeof importReport !== 'undefined' && importReport !== null) { %>
+  <section class="card" style="border-left: 4px solid #10b981;">
+    <div class="card-header">
+      <h2>ผลการนำเข้าข้อมูลจาก CSV</h2>
+    </div>
+    
+    <div style="margin-bottom: 1.25rem;">
+      <p class="text-muted" style="margin: 0 0 1rem 0;">ประมวลผลทั้งหมด <strong><%= importReport.totalRows %></strong> แถว</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+        <div style="background-color: #f0fdf4; padding: 1rem; border-radius: 12px; border: 1px solid #86efac;">
+          <div style="font-size: 0.85rem; color: #166534; margin-bottom: 0.25rem;">สำเร็จทั้งหมด</div>
+          <div style="font-size: 1.75rem; font-weight: 700; color: #15803d;"><%= importReport.successCount %></div>
+        </div>
+        <div style="background-color: #ecfdf5; padding: 1rem; border-radius: 12px; border: 1px solid #6ee7b7;">
+          <div style="font-size: 0.85rem; color: #065f46; margin-bottom: 0.25rem;">สร้างใหม่</div>
+          <div style="font-size: 1.75rem; font-weight: 700; color: #059669;"><%= importReport.createdCount %></div>
+        </div>
+        <div style="background-color: #fef3c7; padding: 1rem; border-radius: 12px; border: 1px solid #fde047;">
+          <div style="font-size: 0.85rem; color: #92400e; margin-bottom: 0.25rem;">อัปเดต</div>
+          <div style="font-size: 1.75rem; font-weight: 700; color: #d97706;"><%= importReport.updatedCount %></div>
+        </div>
+        <div style="background-color: #fef2f2; padding: 1rem; border-radius: 12px; border: 1px solid #fca5a5;">
+          <div style="font-size: 0.85rem; color: #991b1b; margin-bottom: 0.25rem;">ล้มเหลว</div>
+          <div style="font-size: 1.75rem; font-weight: 700; color: #dc2626;"><%= importReport.failedCount %></div>
+        </div>
+      </div>
+
+      <% if (importReport.errors && importReport.errors.length > 0) { %>
+        <div style="background-color: #fef2f2; padding: 1rem; border-radius: 12px; border: 1px solid #fca5a5;">
+          <h3 style="font-size: 1rem; font-weight: 600; color: #991b1b; margin-bottom: 0.75rem;">
+            รายการข้อผิดพลาด (<%= importReport.errors.length %> แถว)
+          </h3>
+          <div style="max-height: 300px; overflow-y: auto;">
+            <% importReport.errors.slice(0, 20).forEach(function(err) { %>
+              <div style="margin-bottom: 0.75rem; padding: 0.75rem; background-color: #fff; border-radius: 8px;">
+                <div style="font-weight: 600; color: #dc2626; margin-bottom: 0.25rem;">แถวที่ <%= err.row %></div>
+                <ul style="margin: 0; padding-left: 1.5rem; color: #4b5563; font-size: 0.9rem;">
+                  <% err.messages.forEach(function(msg) { %>
+                    <li><%= msg %></li>
+                  <% }) %>
+                </ul>
+              </div>
+            <% }) %>
+            <% if (importReport.errors.length > 20) { %>
+              <div style="text-align: center; padding: 0.5rem; color: #6b7280; font-size: 0.9rem;">
+                ... และอีก <%= importReport.errors.length - 20 %> ข้อผิดพลาด
+              </div>
+            <% } %>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </section>
+<% } %>
+
+<section class="card">
+  <div class="card-header">
+    <h2>ค้นหาและกรองผู้เรียน</h2>
+    <span class="text-muted">สามารถค้นหาจากชื่อ อีเมล และเลือกสถานะการสอบได้</span>
+  </div>
+  <form class="filters-form" method="get" action="<%= buildAdminUrl('') %>">
+    <input type="hidden" name="adminToken" value="<%= adminToken %>">
+    <input type="hidden" name="page" value="1">
+    <div class="form-group">
+      <label for="filter-q">ค้นหาชื่อหรืออีเมล</label>
+      <input id="filter-q" type="text" name="q" value="<%= filters.q %>" placeholder="กรอกชื่อหรืออีเมลผู้เรียน">
+    </div>
+    <div class="form-group">
+      <label for="filter-status">สถานะการสอบ</label>
+      <select id="filter-status" name="status">
+        <option value="all" <%= filters.status === 'all' ? 'selected' : '' %>>ทั้งหมด</option>
+        <% examStatuses.forEach(function(status) { %>
+          <option value="<%= status.value %>" <%= filters.status === status.value ? 'selected' : '' %>><%= status.label %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="filter-per-page">จำนวนต่อหน้า</label>
+      <select id="filter-per-page" name="perPage">
+        <% perPageOptions.forEach(function(option) { %>
+          <option value="<%= option %>" <%= filters.perPage === option ? 'selected' : '' %>><%= option %> รายการ</option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="filters-actions">
+      <button class="btn btn-primary" type="submit">ค้นหา</button>
+      <a class="btn btn-ghost" href="<%= buildAdminUrl('', { q: '', status: 'all', perPage: perPageOptions[0], page: 1 }) %>">ล้างการค้นหา</a>
+    </div>
+  </form>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>รายการผู้เรียนทั้งหมด</h2>
+      <p class="text-muted">พบทั้งหมด <%= pagination.totalItems %> รายการ</p>
+    </div>
+    <div class="btn-group">
+      <a class="btn btn-secondary" href="<%= buildAdminUrl('new') %>">เพิ่มผู้เรียน</a>
+      <a class="btn btn-primary" href="<%= buildAdminUrl('import') %>">นำเข้า CSV</a>
+      <a class="btn btn-ghost" href="<%= buildAdminUrl('export', { q: filters.q, status: filters.status }) %>">ส่งออก CSV</a>
+    </div>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>ชื่อ - นามสกุล</th>
+          <th>อีเมล</th>
+          <th>สถานะการสอบ</th>
+          <th>สร้างเมื่อ</th>
+          <th>อัปเดตล่าสุด</th>
+          <th>รีเซ็ตรหัสผ่านล่าสุด</th>
+          <th style="text-align: right;">การจัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (!students.length) { %>
+          <tr>
+            <td colspan="8" class="empty-state">ไม่พบข้อมูลผู้เรียนที่ตรงกับเงื่อนไข</td>
+          </tr>
+        <% } else { %>
+          <% students.forEach(function(student, index) { %>
+            <tr>
+              <td><%= (pagination.from || 0) + index %></td>
+              <td>
+                <div><strong><%= student.firstName %> <%= student.lastName %></strong></div>
+                <div class="text-muted">รหัส: <%= student.id %></div>
+              </td>
+              <td><%= student.email %></td>
+              <td>
+                <% const badgeClass = 'badge--' + student.examStatus; %>
+                <span class="badge <%= badgeClass %>"><%= examStatusLabels[student.examStatus] || student.examStatus %></span>
+              </td>
+              <td><%= formatDateTime(student.createdAt) %></td>
+              <td><%= formatDateTime(student.updatedAt) %></td>
+              <td><%= student.lastPasswordResetAt ? formatDateTime(student.lastPasswordResetAt) : '-' %></td>
+              <td style="text-align: right;">
+                <div class="btn-group">
+                  <a class="btn btn-secondary btn-small" href="<%= buildAdminUrl(student.id + '/edit') %>">แก้ไข</a>
+                  <form class="inline-form" method="post" action="<%= buildAdminUrl(student.id + '/reset-password') %>" data-confirm="ยืนยันรีเซ็ตรหัสผ่านสำหรับ <%= student.firstName %> <%= student.lastName %>?">
+                    <input type="hidden" name="adminToken" value="<%= adminToken %>">
+                    <button class="btn btn-ghost btn-small" type="submit">รีเซ็ตรหัสผ่าน</button>
+                  </form>
+                  <form class="inline-form" method="post" action="<%= buildAdminUrl(student.id) %>" data-confirm="ต้องการลบผู้เรียน <%= student.firstName %> <%= student.lastName %> หรือไม่?">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="adminToken" value="<%= adminToken %>">
+                    <button class="btn btn-danger btn-small" type="submit">ลบ</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <% if (pagination.totalItems > 0) { %>
+    <div class="pagination">
+      <div class="pagination-info">
+        แสดง <%= pagination.from %> - <%= pagination.to %> จากทั้งหมด <%= pagination.totalItems %> รายการ
+      </div>
+      <div class="pagination-controls">
+        <% if (pagination.hasPrev) { %>
+          <a class="btn btn-ghost btn-small" href="<%= buildAdminUrl('', { q: filters.q, status: filters.status, perPage: filters.perPage, page: pagination.prevPage }) %>">&laquo; ก่อนหน้า</a>
+        <% } %>
+        <span class="pagination-page">หน้า <%= pagination.currentPage %> / <%= pagination.totalPages || 1 %></span>
+        <% if (pagination.hasNext) { %>
+          <a class="btn btn-ghost btn-small" href="<%= buildAdminUrl('', { q: filters.q, status: filters.status, perPage: filters.perPage, page: pagination.nextPage }) %>">ถัดไป &raquo;</a>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+</section>
+
+<%- include('../partials/layout-end') %>

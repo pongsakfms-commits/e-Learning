@@ -1,0 +1,13 @@
+<%- include('partials/layout-start', { title: pageTitle || 'เกิดข้อผิดพลาด' }) %>
+
+<section class="card">
+  <div class="card-header">
+    <h2>เกิดข้อผิดพลาดในระบบ</h2>
+  </div>
+  <p class="text-muted"><%= message || 'ไม่สามารถดำเนินการได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง.' %></p>
+  <div class="form-actions">
+    <a class="btn btn-ghost" href="<%= typeof buildAdminUrl === 'function' ? buildAdminUrl('') : '/' %>">กลับหน้าหลัก</a>
+  </div>
+</section>
+
+<%- include('partials/layout-end') %>
