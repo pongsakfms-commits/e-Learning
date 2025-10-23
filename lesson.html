@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทเรียน - e-Learning by Pom</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="lesson">
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🐍 Python Course</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">คอร์สเรียน</a>
+                    <a href="final-project.html">โปรเจกต์สุดท้าย</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="lesson-detail">
+            <div class="lesson-header">
+                <a href="index.html" class="back-link">← กลับไปยังรายการบทเรียน</a>
+                <h2 id="lessonTitle">กำลังโหลด...</h2>
+                <div class="lesson-meta">
+                    <span class="lesson-number" id="lessonNumber"></span>
+                    <span class="lesson-duration" id="lessonDuration"></span>
+                </div>
+                <div class="lesson-progress" data-lesson-progress>
+                    <span class="lesson-progress-status" data-lesson-completion-status>กำลังโหลดสถานะ...</span>
+                    <div class="lesson-progress-track" aria-hidden="true">
+                        <div class="lesson-progress-fill" data-lesson-progress-fill style="width: 0%"></div>
+                    </div>
+                    <p class="lesson-progress-text" data-lesson-progress-text></p>
+                </div>
+            </div>
+
+            <div class="lesson-content">
+                <div class="content-wrapper">
+                    <div class="media-section" id="mediaSection">
+                        <!-- Media content will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="text-content" id="textContent">
+                        <!-- Text content will be dynamically loaded here -->
+                    </div>
+
+                    <div class="lesson-actions">
+                        <button id="markCompleteBtn" class="btn-primary">
+                            <span class="btn-text-incomplete">✓ ทำเครื่องหมายว่าเรียนแล้ว</span>
+                            <span class="btn-text-complete" style="display: none;">✓ เรียนแล้ว</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lesson-navigation">
+                    <button id="prevLesson" class="btn-nav">← บทเรียนก่อนหน้า</button>
+                    <button id="nextLesson" class="btn-nav">บทเรียนถัดไป →</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 e-Learning by Pom. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/lessons-data.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+    <script src="assets/js/lesson-detail.js" defer></script>
+</body>
+</html>
