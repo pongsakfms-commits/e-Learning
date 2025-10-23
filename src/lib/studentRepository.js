@@ -11,6 +11,8 @@ const EXAM_STATUSES = [
   { value: 'failed', label: 'ไม่ผ่านการสอบ' },
 ];
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function ensureDataFile() {
   const directory = path.dirname(DATA_FILE);
   if (!fs.existsSync(directory)) {
@@ -323,6 +325,132 @@ function getExamStatusLabels() {
   }, {});
 }
 
+function importStudents(records = []) {
+  const students = readStudents();
+  const emailIndex = new Map();
+
+  students.forEach((student, index) => {
+    const normalizedEmail = normalizeEmail(student.email);
+    if (normalizedEmail) {
+      emailIndex.set(normalizedEmail, index);
+    }
+  });
+
+  const allowedStatuses = getExamStatusValues();
+  const seenInBatch = new Map();
+
+  const summary = {
+    totalRows: records.length,
+    createdCount: 0,
+    updatedCount: 0,
+    failedCount: 0,
+    successCount: 0,
+    errors: [],
+  };
+
+  let hasChanges = false;
+
+  records.forEach((rawRecord, index) => {
+    const rowNumber = index + 2;
+    const messages = [];
+
+    const firstName = String(rawRecord.firstName ?? '').trim();
+    const lastName = String(rawRecord.lastName ?? '').trim();
+    const email = normalizeEmail(rawRecord.email);
+    const password = String(rawRecord.password ?? '').trim();
+    const examStatus = String(rawRecord.examStatus ?? '').trim();
+
+    if (!firstName) {
+      messages.push('ต้องระบุชื่อ');
+    }
+
+    if (!lastName) {
+      messages.push('ต้องระบุนามสกุล');
+    }
+
+    if (!email) {
+      messages.push('ต้องระบุอีเมล');
+    } else if (!EMAIL_REGEX.test(email)) {
+      messages.push('รูปแบบอีเมลไม่ถูกต้อง');
+    }
+
+    if (!password) {
+      messages.push('ต้องระบุรหัสผ่าน');
+    } else if (password.length < 6 || password.length > 50) {
+      messages.push('รหัสผ่านต้องมีความยาว 6-50 ตัวอักษร');
+    }
+
+    if (!examStatus) {
+      messages.push('ต้องระบุสถานะการสอบ');
+    } else if (!allowedStatuses.includes(examStatus)) {
+      messages.push(`สถานะการสอบไม่ถูกต้อง (ต้องเป็น ${allowedStatuses.join(', ')})`);
+    }
+
+    if (messages.length) {
+      summary.failedCount += 1;
+      summary.errors.push({
+        row: rowNumber,
+        messages,
+      });
+      return;
+    }
+
+    if (seenInBatch.has(email)) {
+      summary.failedCount += 1;
+      summary.errors.push({
+        row: rowNumber,
+        messages: [`อีเมลซ้ำกับแถวที่ ${seenInBatch.get(email)}`],
+      });
+      return;
+    }
+
+    seenInBatch.set(email, rowNumber);
+
+    const timestamp = new Date().toISOString();
+
+    if (emailIndex.has(email)) {
+      const existingIndex = emailIndex.get(email);
+      const existing = students[existingIndex];
+
+      existing.firstName = firstName;
+      existing.lastName = lastName;
+      existing.examStatus = examStatus;
+      existing.passwordHash = hashPassword(password);
+      existing.updatedAt = timestamp;
+      existing.lastPasswordResetAt = timestamp;
+
+      students[existingIndex] = existing;
+      summary.updatedCount += 1;
+    } else {
+      const newStudent = {
+        id: randomUUID(),
+        firstName,
+        lastName,
+        email,
+        examStatus,
+        passwordHash: hashPassword(password),
+        createdAt: timestamp,
+        updatedAt: timestamp,
+        lastPasswordResetAt: null,
+      };
+
+      students.push(newStudent);
+      emailIndex.set(email, students.length - 1);
+      summary.createdCount += 1;
+    }
+
+    hasChanges = true;
+  });
+
+  if (hasChanges) {
+    writeStudents(students);
+  }
+
+  summary.successCount = summary.createdCount + summary.updatedCount;
+
+  return summary;
+}
+
 module.exports = {
   list,
   listAll,
@@ -334,4 +462,5 @@ module.exports = {
   emailExists,
   getExamStatuses,
   getExamStatusLabels,
+  importStudents,
 };

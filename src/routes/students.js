@@ -1,9 +1,33 @@
 const express = require('express');
+const multer = require('multer');
 const { validationResult } = require('express-validator');
 const StudentRepository = require('../lib/studentRepository');
+const { parseCsvFile } = require('../lib/csvParser');
 const { createStudentRules, updateStudentRules } = require('../validation/studentRules');
 
 const router = express.Router();
+
+const MAX_IMPORT_FILE_SIZE = 5 * 1024 * 1024;
+const ALLOWED_MIME_TYPES = ['text/csv', 'application/vnd.ms-excel', 'application/csv', 'text/plain'];
+
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: MAX_IMPORT_FILE_SIZE,
+  },
+  fileFilter: (req, file, cb) => {
+    const lowerName = (file.originalname || '').toLowerCase();
+    const isCsvExtension = lowerName.endsWith('.csv');
+    const isAllowedMime = ALLOWED_MIME_TYPES.includes(file.mimetype);
+
+    if (isCsvExtension || isAllowedMime) {
+      cb(null, true);
+    } else {
+      cb(new Error('INVALID_FILE_TYPE'));
+    }
+  },
+});
 
 const perPageOptions = [10, 20, 50];
 const dateTimeFormatter = new Intl.DateTimeFormat('th-TH', {
@@ -122,6 +146,7 @@ router.get('/', (req, res) => {
       status: examStatus,
       perPage,
     },
+    importReport: null,
   });
 });
 
@@ -321,6 +346,91 @@ router.get('/export', (req, res) => {
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
   res.setHeader('Content-Disposition', `attachment; filename="students-${timestamp}.csv"`);
   return res.send(`\uFEFF${csvContent}`);
+});
+
+router.get('/import', (req, res) => {
+  res.render('students/import', {
+    pageTitle: 'นำเข้าข้อมูลผู้เรียนจาก CSV',
+    error: null,
+  });
+});
+
+router.post('/import', (req, res) => {
+  const uploadHandler = upload.single('csvFile');
+
+  uploadHandler(req, res, (uploadErr) => {
+    if (uploadErr) {
+      let errorMessage = 'ไม่สามารถอัปโหลดไฟล์ได้';
+
+      if (uploadErr.code === 'LIMIT_FILE_SIZE') {
+        errorMessage = `ไฟล์มีขนาดใหญ่เกินไป (สูงสุด ${MAX_IMPORT_FILE_SIZE / (1024 * 1024)}MB)`;
+      } else if (uploadErr.message === 'INVALID_FILE_TYPE') {
+        errorMessage = 'ต้องเป็นไฟล์ .csv เท่านั้น';
+      } else if (uploadErr.message) {
+        errorMessage = uploadErr.message;
+      }
+
+      return res.status(400).render('students/import', {
+        pageTitle: 'นำเข้าข้อมูลผู้เรียนจาก CSV',
+        error: errorMessage,
+      });
+    }
+
+    if (!req.file) {
+      return res.status(400).render('students/import', {
+        pageTitle: 'นำเข้าข้อมูลผู้เรียนจาก CSV',
+        error: 'กรุณาเลือกไฟล์ CSV',
+      });
+    }
+
+    try {
+      const records = parseCsvFile(req.file.buffer);
+      const importSummary = StudentRepository.importStudents(records);
+
+      const searchTerm = (req.query.q || '').trim();
+      const statusQuery = (req.query.status || 'all').trim();
+      const examStatus = isValidStatus(statusQuery) ? statusQuery : 'all';
+      const perPage = resolvePerPage(req.query.perPage);
+      const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+
+      const { data: students, pagination } = StudentRepository.list({
+        searchTerm,
+        examStatus,
+        page,
+        perPage,
+      });
+
+      const successMessage = importSummary.successCount > 0
+        ? `นำเข้าสำเร็จ ${importSummary.successCount} รายการ (สร้างใหม่ ${importSummary.createdCount}, อัปเดต ${importSummary.updatedCount})`
+        : null;
+
+      let failureMessage = null;
+      if (importSummary.failedCount > 0) {
+        failureMessage = importSummary.successCount > 0
+          ? `มี ${importSummary.failedCount} รายการที่ไม่ผ่านการนำเข้า`
+          : 'ไม่สามารถนำเข้าข้อมูลได้ เนื่องจากทุกแถวไม่ผ่านการตรวจสอบ';
+      }
+
+      return res.render('students/index', {
+        pageTitle: 'จัดการผู้เรียน',
+        students,
+        pagination,
+        filters: {
+          q: searchTerm,
+          status: examStatus,
+          perPage,
+        },
+        importReport: importSummary,
+        notice: successMessage,
+        error: failureMessage,
+      });
+    } catch (error) {
+      return res.status(422).render('students/import', {
+        pageTitle: 'นำเข้าข้อมูลผู้เรียนจาก CSV',
+        error: error.message || 'ไม่สามารถนำเข้าไฟล์ได้',
+      });
+    }
+  });
 });
 
 module.exports = router;

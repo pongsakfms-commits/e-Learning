@@ -1,0 +1,57 @@
+<%- include('../partials/layout-start', { title: pageTitle }) %>
+
+<section class="card">
+  <div class="card-header">
+    <h2>นำเข้าข้อมูลผู้เรียนจาก CSV</h2>
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem;">รูปแบบไฟล์ CSV</h3>
+    <p style="margin-bottom: 0.5rem; color: #4b5563;">ไฟล์ต้องมีหัวตารางและคอลัมน์ดังต่อไปนี้:</p>
+    <div style="background-color: #f9fafb; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; overflow-x: auto; margin-bottom: 1rem;">
+      <div>firstName,lastName,email,password,examStatus</div>
+      <div style="color: #6b7280;">สมชาย,ใจดี,somchai@example.com,pass1234,not_started</div>
+      <div style="color: #6b7280;">สมหญิง,รักดี,somying@example.com,pass5678,in_progress</div>
+    </div>
+
+    <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">คอลัมน์ที่ต้องการ:</h4>
+    <ul style="margin: 0 0 1rem 1.5rem; color: #4b5563;">
+      <li><strong>firstName</strong> - ชื่อผู้เรียน (ไม่ว่าง)</li>
+      <li><strong>lastName</strong> - นามสกุลผู้เรียน (ไม่ว่าง)</li>
+      <li><strong>email</strong> - อีเมลผู้เรียน (ต้องเป็นรูปแบบอีเมลที่ถูกต้อง)</li>
+      <li><strong>password</strong> - รหัสผ่าน (ความยาว 6-50 ตัวอักษร)</li>
+      <li><strong>examStatus</strong> - สถานะการสอบ (not_started, in_progress, passed, failed)</li>
+    </ul>
+
+    <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">ข้อกำหนด:</h4>
+    <ul style="margin: 0 0 1rem 1.5rem; color: #4b5563;">
+      <li>ไฟล์ต้องเป็นนามสกุล <strong>.csv</strong> เท่านั้น</li>
+      <li>ขนาดไฟล์ไม่เกิน <strong>5MB</strong></li>
+      <li>จำนวนแถวไม่เกิน <strong>1,000 แถว</strong> (ไม่รวมแถวหัวตาราง)</li>
+      <li>การเข้ารหัสควรเป็น UTF-8</li>
+      <li>หากอีเมลซ้ำกับที่มีอยู่แล้ว ระบบจะอัปเดตข้อมูลผู้เรียนคนนั้น</li>
+    </ul>
+  </div>
+
+  <form method="post" action="<%= buildAdminUrl('import') %>" enctype="multipart/form-data">
+    <input type="hidden" name="adminToken" value="<%= adminToken %>">
+    
+    <div class="form-group" style="margin-bottom: 1.5rem;">
+      <label for="csvFile" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">เลือกไฟล์ CSV</label>
+      <input 
+        type="file" 
+        id="csvFile" 
+        name="csvFile" 
+        accept=".csv,text/csv" 
+        required
+        style="display: block; padding: 0.65rem 0.85rem; border: 1px solid #d1d5db; border-radius: 10px; width: 100%; max-width: 500px;">
+    </div>
+
+    <div class="form-actions" style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+      <button type="submit" class="btn btn-primary">นำเข้าข้อมูล</button>
+      <a class="btn btn-ghost" href="<%= buildAdminUrl('') %>">ยกเลิก</a>
+    </div>
+  </form>
+</section>
+
+<%- include('../partials/layout-end') %>
