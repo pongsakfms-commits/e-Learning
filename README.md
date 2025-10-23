@@ -29,6 +29,40 @@ A comprehensive quiz and exercise system with support for multiple question type
 - Automatic deduplication to prevent data inconsistencies
 - Immutable attempt records after submission
 
+## Question Banks
+
+The system includes comprehensive question banks for Python programming:
+
+### Pre-Test (20 questions)
+- Multiple choice questions covering Python fundamentals
+- Topics: syntax, data types, operators, control flow, basic functions
+- Designed to assess baseline knowledge before course enrollment
+- 100 total points (5 points per question)
+
+### Post-Test (20 questions)
+- Advanced multiple choice questions
+- Topics: generators, decorators, comprehensions, exceptions, file I/O
+- Evaluates learning outcomes after course completion
+- 100 total points (5 points per question)
+
+### True/False Exercise (10 questions)
+- Binary choice questions testing conceptual understanding
+- Topics: Python features, data structures, syntax rules
+- 20 total points (2 points per question)
+
+### Matching Exercise (5 question sets)
+- Match Python concepts, keywords, functions, and outputs
+- Each set contains 4 matching pairs
+- 20 total points (4 points per question set)
+
+**Total: 55 questions across 4 quizzes, 240 total points**
+
+All questions include:
+- Correct answer mappings
+- Point values
+- Explanations for learning reinforcement
+- Thai documentation for instructors and course designers ([QUESTION_BANKS_TH.md](QUESTION_BANKS_TH.md))
+
 ## Installation
 
 No external dependencies required - uses only Python standard library.
@@ -37,6 +71,9 @@ No external dependencies required - uses only Python standard library.
 # Clone the repository
 git clone <repository-url>
 cd e-Learning-pom
+
+# Seed the question banks
+python seed_data.py
 
 # Run example
 python example_usage.py
