@@ -34,8 +34,10 @@ The database seeder creates the following users (passwords are hashed automatica
 
 | Role   | Email               | Password |
 |--------|---------------------|----------|
-| Admin  | admin@example.com   | password |
-| Student| student@example.com | password |
+| Admin  | admin@example.com   | (see note below) |
+| Student| student@example.com | password123 |
+
+> Tip: Set `ADMIN_DEFAULT_PASSWORD` and `STUDENT_DEFAULT_PASSWORD` in your `.env` file before running the seeder. When `ADMIN_DEFAULT_PASSWORD` is not provided, a strong random password will be generated and displayed in the console output.
 
 ## Usage
 

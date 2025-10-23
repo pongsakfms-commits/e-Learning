@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,20 +17,38 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $adminPassword = env('ADMIN_DEFAULT_PASSWORD');
+        $studentPassword = env('STUDENT_DEFAULT_PASSWORD', 'password123');
 
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'role' => 'admin',
-            'password' => Hash::make('password'),
-        ]);
+        if (!User::where('email', 'admin@example.com')->exists()) {
+            if (empty($adminPassword)) {
+                $adminPassword = Str::random(16);
+                $this->command?->warn(sprintf(
+                    'Seeded admin credentials — email: %s password: %s',
+                    'admin@example.com',
+                    $adminPassword
+                ));
+            }
 
-        User::factory()->create([
-            'name' => 'Student User',
-            'email' => 'student@example.com',
-            'role' => 'student',
-            'password' => Hash::make('password'),
-        ]);
+            User::create([
+                'name' => 'Admin User',
+                'email' => 'admin@example.com',
+                'role' => User::ROLE_ADMIN,
+                'password' => Hash::make($adminPassword),
+                'email_verified_at' => now(),
+                'remember_token' => Str::random(10),
+            ]);
+        }
+
+        if (!User::where('email', 'student@example.com')->exists()) {
+            User::create([
+                'name' => 'Student User',
+                'email' => 'student@example.com',
+                'role' => User::ROLE_STUDENT,
+                'password' => Hash::make($studentPassword ?: Str::random(16)),
+                'email_verified_at' => now(),
+                'remember_token' => Str::random(10),
+            ]);
+        }
     }
 }

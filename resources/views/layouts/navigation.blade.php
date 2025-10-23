@@ -20,6 +20,11 @@
                     <x-nav-link :href="route($dashboardRouteName)" :active="request()->routeIs($dashboardRouteName)">
                         {{ $dashboardLabel }}
                     </x-nav-link>
+                    @if($user && $user->role === 'admin')
+                        <x-nav-link :href="route('admin.admins.index')" :active="request()->routeIs('admin.admins.*')">
+                            {{ __('Manage Admins') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -75,6 +80,11 @@
             <x-responsive-nav-link :href="route($dashboardRouteName)" :active="request()->routeIs($dashboardRouteName)">
                 {{ $dashboardLabel }}
             </x-responsive-nav-link>
+            @if($user && $user->role === 'admin')
+                <x-responsive-nav-link :href="route('admin.admins.index')" :active="request()->routeIs('admin.admins.*')">
+                    {{ __('Manage Admins') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
