@@ -1,0 +1,25 @@
+{
+  "name": "e-learning-pom",
+  "version": "1.0.0",
+  "description": "e-Learning platform with Google Sheets integration",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "keywords": ["e-learning", "google-sheets"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^128.0.0",
+    "dotenv": "^16.3.1",
+    "p-retry": "^6.1.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.2",
+    "ts-node": "^10.9.2"
+  }
+}
