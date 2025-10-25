@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+web/node_modules/
+api/node_modules/
+
+# Build outputs
+build/
+dist/
+web/dist/
+api/dist/
+web/.next/
+
+# Environment & credentials
+.env
+.env.*
+*.env
+*.pem
+*.key
+service-account.json
+
+# Logs & diagnostics
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing & coverage
+coverage/
+.vitest/
+playwright-report/
+
+# Local data & uploads
+storage/
+backups/
+**/uploads/
+**/exports/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
